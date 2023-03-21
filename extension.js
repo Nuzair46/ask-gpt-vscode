@@ -1,22 +1,9 @@
-const vscode = require("vscode");
+const { panelView } = require("./src/panelView");
+const { settingsView } = require("./src/settingsView");
 
-/**
- * @param {vscode.ExtensionContext} context
- */
 const activate = (context) => {
-  const provider = {
-    resolveWebviewView: (webviewView) => {
-      webviewView.webview.options = { enableScripts: true };
-      webviewView.webview.html = `<!doctype><html><body><h1>Test</h1></body></html>`;
-    },
-  };
-
-  const panelView = vscode.window.registerWebviewViewProvider(
-    "ask-gpt.webView",
-    provider
-  );
-
   context.subscriptions.push(panelView);
+  context.subscriptions.push(settingsView);
 };
 
 // This method is called when your extension is deactivated
