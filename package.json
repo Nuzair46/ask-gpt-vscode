@@ -24,7 +24,8 @@
     "views": {
       "ask-gpt-vscode": [
         {
-          "id": "ask-gpt",
+          "type": "webview",
+          "id": "ask-gpt.webView",
           "name": "Ask GPT"
         }
       ]
