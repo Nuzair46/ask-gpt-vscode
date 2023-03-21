@@ -1,8 +1,9 @@
 const { panelView } = require("./src/panelView");
-const { settings } = require("./src/settings");
+const { settings, apiKeyCommand } = require("./src/settings");
 
 const activate = (context) => {
   settings();
+  context.subscriptions.push(apiKeyCommand);
   context.subscriptions.push(panelView);
 };
 

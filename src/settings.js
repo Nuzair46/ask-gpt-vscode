@@ -1,15 +1,23 @@
 const vscode = require("vscode");
 
-const settings = async () => {
+const settings = () => {
   if (!isApiKeySetupComplete()) {
-    await inputApiKey();
+    inputApiKey();
   }
 };
+
+const apiKeyCommand = vscode.commands.registerCommand(
+  "ask-gpt-vscode.setApiKey",
+  () => {
+    inputApiKey();
+  }
+);
 
 const inputApiKey = async () =>
   await vscode.window
     .showInputBox({
-      prompt: "Enter OpenAI API Key",
+      prompt:
+        "Enter OpenAI API Key from [OpenAI](https://platform.openai.com/account/api-keys) (Will reload vscode)",
       placeHolder: "sk-************************************",
     })
     .then((apiKey) => {
@@ -30,6 +38,16 @@ const getApiKey = () =>
 const setApiKey = (apiKey) =>
   vscode.workspace
     .getConfiguration()
-    .update("ask-gpt-vscode.apiKey", apiKey, true);
+    .update("ask-gpt-vscode.apiKey", apiKey, true)
+    .then(() => {
+      // reload the extension
+      vscode.commands.executeCommand("workbench.action.reloadWindow");
+    });
 
-module.exports = { settings, inputApiKey, isApiKeySetupComplete };
+module.exports = {
+  settings,
+  inputApiKey,
+  isApiKeySetupComplete,
+  getApiKey,
+  apiKeyCommand,
+};
