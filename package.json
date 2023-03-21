@@ -12,10 +12,23 @@
   "activationEvents": [],
   "main": "./extension.js",
   "contributes": {
-    "commands": [{
-      "command": "ask-gpt-vscode.helloWorld",
-      "title": "Hello World"
-    }]
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ask-gpt-vscode",
+          "title": "Ask GPT",
+          "icon": "images/logo.png"
+        }
+      ]
+    },
+    "views": {
+      "ask-gpt-vscode": [
+        {
+          "id": "ask-gpt",
+          "name": "Ask GPT"
+        }
+      ]
+    }
   },
   "scripts": {
     "lint": "eslint .",
