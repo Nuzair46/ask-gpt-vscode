@@ -1,9 +1,9 @@
 const { panelView } = require("./src/panelView");
-const { settingsView } = require("./src/settingsView");
+const { settings } = require("./src/settings");
 
 const activate = (context) => {
+  settings();
   context.subscriptions.push(panelView);
-  context.subscriptions.push(settingsView);
 };
 
 // This method is called when your extension is deactivated
