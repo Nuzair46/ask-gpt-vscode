@@ -44,6 +44,10 @@
       {
         "command": "ask-gpt-vscode.setApiKey",
         "title": "Set OpenAI API Key"
+      },
+      {
+        "command": "ask-gpt-vscode.askGpt",
+        "title": "Ask GPT"
       }
     ]
   },
@@ -64,6 +68,6 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
-    "chatgpt": "^5.1.2"
+    "openai": "^3.2.1"
   }
 }

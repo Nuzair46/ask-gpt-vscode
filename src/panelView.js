@@ -1,4 +1,5 @@
 const vscode = require("vscode");
+const { getCompletion } = require("./client");
 const { isApiKeySetupComplete } = require("./settings");
 
 const chatboxProvider = {
@@ -13,6 +14,29 @@ const panelView = vscode.window.registerWebviewViewProvider(
   chatboxProvider
 );
 
+const questionCommand = vscode.commands.registerCommand(
+  "ask-gpt-vscode.askGpt",
+  () => {
+    inputQuestion();
+  }
+);
+
+const inputQuestion = () => {
+  vscode.window
+    .showInputBox({ prompt: "Ask GPT a question" })
+    .then((question) => {
+      if (question) {
+        getCompletion(question)
+          .then((completion) => {
+            vscode.window.showInformationMessage(completion);
+          })
+          .catch((err) => {
+            vscode.window.showInformationMessage(err);
+          });
+      }
+    });
+};
+
 const chatPage = () => `
 <!doctype html>
 <html>
@@ -23,7 +47,10 @@ const chatPage = () => `
 `;
 
 const chatBox = `
-	<p>Ask GPT a question and it will answer it.</p>
+	<p>Ask GPT a question and it will answer it.<br>
+	1. Use the command + shift + p and search for 'Ask GPT'.<br>
+	2. Type your question in the input box.<br>
+	</p>
 	<div id="chatbox"></div>
 `;
 
@@ -35,4 +62,4 @@ const invalidSetup = `
 	</p>
 `;
 
-module.exports = { panelView };
+module.exports = { panelView, questionCommand };
