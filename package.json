@@ -3,6 +3,11 @@
   "displayName": "Ask GPT",
   "description": "A vscode extension to ask ChatGPT questions on the fly",
   "version": "0.0.1",
+  "publisher": "Nuzair46",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nuzair46/ask-gpt-vscode"},
   "engines": {
     "vscode": "^1.76.0"
   },
