@@ -1,5 +1,14 @@
 # Ask GPT - A VSCode Extension to Ask ChatGPT Questions on the Fly
 
+<p align="center">
+    <a href="https://marketplace.visualstudio.com/items?itemName=Nuzair46.ask-gpt-vscode" alt="Version">
+        <img src="https://img.shields.io/visual-studio-marketplace/v/Nuzair46.ask-gpt-vscode?color=green&label=VS%20Code%20Marketplace" />
+    </a>
+    <!-- <a href="https://marketplace.visualstudio.com/items?itemName=Nuzair46.ask-gpt-vscode" alt="Download count">
+        <img src="https://img.shields.io/visual-studio-marketplace/d/Nuzair46.ask-gpt-vscode?color=red&label=Downloads" />
+    </a> -->
+</p>
+
 Welcome to the Ask GPT repository! This is a VSCode extension that enables you to ask ChatGPT questions right from your editor. With the help of OpenAI's language model, you can get answers to your queries on the fly.
 
 ## Installation
