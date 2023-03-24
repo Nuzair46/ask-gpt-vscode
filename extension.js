@@ -1,4 +1,4 @@
-const { panelView, questionCommand } = require("./src/panelView");
+const { panelView, questionCommand } = require("./src/sidePanel");
 const { settings, apiKeyCommand } = require("./src/settings");
 
 const activate = (context) => {
