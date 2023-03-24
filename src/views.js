@@ -11,7 +11,7 @@ const chatPage = (question, answer) => `
 			}
 			.chatbox {
 				padding: 10px;
-				display: ${question && answer ? "block" : "none"};
+				display: ${question || answer ? "block" : "none"};
 				margin-top: 10px;
 			}
       .question {

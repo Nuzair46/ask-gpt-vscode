@@ -10,6 +10,9 @@ const chatboxProvider = {
     webviewView.webview.html = chatPage("", "");
 
     webviewView.webview.onDidReceiveMessage((message) => {
+      if (message.type === "loading") {
+        webviewView.webview.html = chatPage(message.question, "");
+      }
       if (message.type === "update") {
         const { question, answer } = message.payload;
         webviewView.webview.html = chatPage(question, answer);
@@ -35,6 +38,11 @@ const inputQuestion = async () => {
     prompt: "Ask GPT a question",
   });
   if (question) {
+    _panel.webview.postMessage({
+      type: "loading",
+      question,
+    });
+    _panel.webview.html = chatPage(question, "");
     const answer = await getCompletion(question);
     if (answer) {
       if (_panel) {

@@ -1,7 +1,7 @@
 {
   "name": "ask-gpt-vscode",
-  "displayName": "ask gpt vscode",
-  "description": "chatgpt vscode",
+  "displayName": "Ask GPT",
+  "description": "A vscode extension to ask ChatGPT questions on the fly",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.76.0"
