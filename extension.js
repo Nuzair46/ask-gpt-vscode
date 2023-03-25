@@ -1,8 +1,8 @@
 const { panelView, questionCommand } = require("./src/sidePanel");
-const { settings, apiKeyCommand } = require("./src/settings");
+const { setup, apiKeyCommand } = require("./src/settings");
 
 const activate = (context) => {
-  settings();
+  setup();
   context.subscriptions.push(apiKeyCommand);
   context.subscriptions.push(questionCommand);
   context.subscriptions.push(panelView);

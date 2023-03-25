@@ -1,9 +1,7 @@
 const vscode = require("vscode");
 
-const settings = () => {
-  if (!isApiKeySetupComplete()) {
-    inputApiKey();
-  }
+const setup = () => {
+  !isApiKeySetupComplete() && inputApiKey();
 };
 
 const apiKeyCommand = vscode.commands.registerCommand(
@@ -13,18 +11,14 @@ const apiKeyCommand = vscode.commands.registerCommand(
   }
 );
 
-const inputApiKey = async () =>
-  await vscode.window
-    .showInputBox({
-      prompt:
-        "Enter OpenAI API Key from [OpenAI](https://platform.openai.com/account/api-keys) (Will reload vscode)",
-      placeHolder: "sk-************************************",
-    })
-    .then((apiKey) => {
-      if (apiKey) {
-        setApiKey(apiKey);
-      }
-    });
+const inputApiKey = async () => {
+  const apiKey = await vscode.window.showInputBox({
+    prompt:
+      "Enter OpenAI API Key from [OpenAI](https://platform.openai.com/account/api-keys) (Will reload vscode)",
+    placeHolder: "sk-************************************",
+  });
+  setApiKey(apiKey);
+};
 
 const isApiKeySetupComplete = () => {
   const apiKey = getApiKey();
@@ -45,7 +39,7 @@ const setApiKey = (apiKey) =>
     });
 
 module.exports = {
-  settings,
+  setup,
   inputApiKey,
   isApiKeySetupComplete,
   getApiKey,
