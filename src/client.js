@@ -7,11 +7,11 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-const getCompletion = async (question) => {
+const getCompletion = async (messages) => {
   try {
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: question }],
+      messages: messages,
     });
     const completion_text = completion.data.choices[0].message.content;
     return completion_text;

@@ -1,6 +1,6 @@
 const { isApiKeySetupComplete } = require("./settings");
 
-const chatPage = (question, answer) => `
+const chatPage = (history) => `
 <!doctype html>
 <html>
   <head>
@@ -11,7 +11,6 @@ const chatPage = (question, answer) => `
 			}
 			.chatbox {
 				padding: 10px;
-				display: ${question || answer ? "block" : "none"};
 				margin-top: 10px;
 			}
       .question {
@@ -26,6 +25,7 @@ const chatPage = (question, answer) => `
 				background-color: #2d2e2d;
 				border-radius: 5px;
 				padding: 10px 5px;
+        margin-bottom: 8px;
       }
       .instructions {
         margin-bottom: 8px;
@@ -39,22 +39,37 @@ const chatPage = (question, answer) => `
   <body>
   	${
       isApiKeySetupComplete()
-        ? getWebviewContent(question, answer)
+        ? getWebviewContent(history)
         : getInvalidSetupHtml()
     }
   </body>
 </html>
 `;
 
-const getWebviewContent = (question, answer) => `
+const getWebviewContent = (history) => `
 <div class="instructions">
   ${getInstructionsHtml()}
 </div>
-<div class="chatbox">
-  <div class="question">Q: ${question}</div>
-  <div class="answer">A: ${answer}</div>
-</div>
+${
+  history.length > 0
+    ? `
+  <div class="chatbox">
+    ${getMessagesHtml(history)}
+  </div>
+`
+    : ""
+}
 `;
+
+const getMessagesHtml = (history) =>
+  history
+    .map(
+      (history) => `
+    <div class="question">Q: ${history[0]}</div>
+    <div class="answer">A: ${history[1]}</div>
+  `
+    )
+    .join("");
 
 const getInstructionsHtml = () => `
 <p>
