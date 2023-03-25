@@ -28,10 +28,7 @@ const panelView = vscode.window.registerWebviewViewProvider(
 
 const questionCommand = vscode.commands.registerCommand(
   "ask-gpt-vscode.askGpt",
-  () => {
-    showPanel();
-    inputQuestion();
-  }
+  () => inputQuestion()
 );
 
 const showPanel = async () =>
@@ -40,6 +37,7 @@ const showPanel = async () =>
   );
 
 const inputQuestion = async () => {
+  showPanel();
   const question = await vscode.window.showInputBox({
     prompt: "Ask GPT a question",
   });

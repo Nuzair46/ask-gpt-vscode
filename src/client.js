@@ -15,8 +15,11 @@ const getCompletion = async (question) => {
     });
     const completion_text = completion.data.choices[0].message.content;
     return completion_text;
-  } catch (err) {
-    vscode.window.showInformationMessage("error" + err);
+  } catch (error) {
+    vscode.window.showErrorMessage(
+      `Unable to get answer from OpenAI: ${error.message}`
+    );
+    return null;
   }
 };
 
