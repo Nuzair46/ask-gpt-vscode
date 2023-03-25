@@ -40,7 +40,7 @@ const chatPage = (question, answer) => `
   	${
       isApiKeySetupComplete()
         ? getWebviewContent(question, answer)
-        : invalidSetup
+        : getInvalidSetupHtml()
     }
   </body>
 </html>
@@ -48,22 +48,22 @@ const chatPage = (question, answer) => `
 
 const getWebviewContent = (question, answer) => `
 <div class="instructions">
-  ${instructions}
+  ${getInstructionsHtml()}
 </div>
 <div class="chatbox">
   <div class="question">Q: ${question}</div>
   <div class="answer">A: ${answer}</div>
 </div>
-  `;
+`;
 
-const instructions = `
+const getInstructionsHtml = () => `
 <p>
   Ask GPT a question and it will answer it.<br>
   1. Use the command + shift + p and search for 'Ask GPT'.<br>
   2. Type your question in the input box.<br>
 </p>`;
 
-const invalidSetup = `
+const getInvalidSetupHtml = () => `
 	<p>Looks like OpenAI API Key was not setup. <br>
 	1. Copy the API key from <a href="https://platform.openai.com/account/api-keys" target="_blank">OpenAI</a>.<br>
 	2. Set it up with command + shift + p and search for 'Set OpenAI API Key'.<br>
