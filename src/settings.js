@@ -1,6 +1,6 @@
 const vscode = require("vscode");
 
-const setup = () => {
+const initializeExtension = () => {
   !isApiKeySetupComplete() && inputApiKey();
 };
 
@@ -29,17 +29,15 @@ const isApiKeySetupComplete = () => {
 const getApiKey = () =>
   vscode.workspace.getConfiguration().get("ask-gpt-vscode.apiKey");
 
-const setApiKey = (apiKey) =>
-  vscode.workspace
-    .getConfiguration()
-    .update("ask-gpt-vscode.apiKey", apiKey, true)
-    .then(() => {
-      // reload the extension
-      vscode.commands.executeCommand("workbench.action.reloadWindow");
-    });
+const setApiKey = (apiKey) => {
+  const config = vscode.workspace.getConfiguration();
+  return config.update("ask-gpt-vscode.apiKey", apiKey, true).then(() => {
+    vscode.commands.executeCommand("workbench.action.reloadWindow");
+  });
+};
 
 module.exports = {
-  setup,
+  initializeExtension,
   inputApiKey,
   isApiKeySetupComplete,
   getApiKey,
